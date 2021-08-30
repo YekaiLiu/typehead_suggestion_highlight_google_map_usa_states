@@ -3572,3 +3572,38 @@ function showSuggestions(list){
     suggBox.innerHTML = listData;
 }
 
+
+
+
+
+ 
+function myMap() {
+var mapProp= {
+center:new google.maps.LatLng(42.970125,-117.4098812),
+zoom:4.17,
+};
+const anqing_beizheng_street = { lat: 30.5145637, lng: 117.0388954 };
+const Vibrant_America = { lat: 37.4995312, lng: -122.2496577 };
+const new_york_next_moving = { lat: 40.6254669, lng: -73.9589734};
+
+
+var googleMap = new google.maps.Map(document.getElementById("googleMap"),mapProp); 
+
+
+const marker = new google.maps.Marker({
+    position: anqing_beizheng_street,
+    map: googleMap,
+});
+
+const marker1 = new google.maps.Marker({
+    position: new_york_next_moving,
+    map: googleMap,
+});
+
+const marker2 = new google.maps.Marker({
+    position: Vibrant_America,
+    map: googleMap,
+});
+
+
+}
