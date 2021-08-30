@@ -45,6 +45,39 @@ function select(element){
         linkTag.click();
     }
     searchWrapper.classList.remove("active");
+
+    var mapProp= {
+        center:new google.maps.LatLng(39.089077,-103.2069358 ),
+        zoom:5,
+        };
+        var googleMap = new google.maps.Map(document.getElementById("googleMap"),mapProp); 
+    
+        // Define the LatLng coordinates for the polygon's path.
+        var dict = {};
+        dict.Alabama=[
+            
+            { lat: 35.0041, lng: -88.1955 },
+            { lat: 31.7947, lng: -85.1358 },
+            { lat: 32.2593, lng: -84.8927 },
+            { lat: 30.4404, lng: -87.3688 },
+            { lat: 34.9107, lng: -88.1461},
+        ];
+   
+    
+    
+        // Construct the polygon.
+        var newpolygon = new google.maps.Polygon({
+            
+            paths: dict[selectData],
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+        });
+    
+        newpolygon.setMap(googleMap);
+    
 }
 
 function showSuggestions(list){
@@ -58,35 +91,3 @@ function showSuggestions(list){
     suggBox.innerHTML = listData;
 }
 
-function myMap() {
-
-    var mapProp= {
-    center:new google.maps.LatLng(39.089077,-103.2069358 ),
-    zoom:5,
-    };
-    var googleMap = new google.maps.Map(document.getElementById("googleMap"),mapProp); 
-
-    // Define the LatLng coordinates for the polygon's path.
-    const Alabama = [
-        
-        { lat: 35.0041, lng: -88.1955 },
-        { lat: 31.7947, lng: -85.1358 },
-        { lat: 32.2593, lng: -84.8927 },
-        { lat: 30.4404, lng: -87.3688 },
-        { lat: 34.9107, lng: -88.1461},
-    ];
-
-
-    // Construct the polygon.
-    const newpolygon = new google.maps.Polygon({
-        paths: Alabama,
-        strokeColor: "#FF0000",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#FF0000",
-        fillOpacity: 0.35,
-    });
-
-    newpolygon.setMap(googleMap);
-
-    }
