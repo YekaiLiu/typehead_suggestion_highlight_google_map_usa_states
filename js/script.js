@@ -31,14 +31,10 @@ inputBox.onkeyup = (e)=>{
     */
     flag=0;
     flag2=0;
- 
-
-    
 
     let userData = e.target.value; //user enetered data
     let emptyArray = [];
     if(userData){
-        
 
         emptyArray = suggestions.filter((data)=>{
             //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
@@ -46,33 +42,19 @@ inputBox.onkeyup = (e)=>{
         });
         emptyArray = emptyArray.map((data)=>{
             // passing return data inside li tag
-            
             return data = `<li>${data}</li>`;
         });
         searchWrapper.classList.add("active"); //show autocomplete box
-
-        //suggBox.classList.add("selected");//???
-
-        //searchWrapper.classList.add("selected");//xxx
-
-        //showSuggestions(emptyArray);
+        showSuggestions(emptyArray);
         let allList = suggBox.querySelectorAll("li");
         
-     
-        
-        let upperbound=allList.length-1;
+        let upperbound=allList.length-1
         
         
       
         for (let i = 0; i < allList.length; i++) {
             //adding onclick attribute in all li tag
             allList[i].setAttribute("onclick", "select(this)");
-        
-     
-          
-
-            
-            //up arrow down arrow hit enter to select
             if((e.which==40) & (flag==0)){
                 console.log("40") //40 down arrow
                 if(pointer<upperbound){
@@ -119,13 +101,13 @@ inputBox.onkeyup = (e)=>{
             }
 
 
-        }
         
+        }
     }else{
         searchWrapper.classList.remove("active"); //hide autocomplete box
     }
 
-    showSuggestions(emptyArray);//
+    
 }
 
 
@@ -3647,6 +3629,8 @@ function select(element){
     
 }
 
+
+
 function showSuggestions(list){
     let listData;
     if(!list.length){
@@ -3662,6 +3646,7 @@ function showSuggestions(list){
     suggBox.innerHTML = listData;
    
 }
+
 
 
 
