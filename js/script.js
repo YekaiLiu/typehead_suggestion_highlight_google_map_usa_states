@@ -7,35 +7,125 @@ const icon = searchWrapper.querySelector(".icon");
 let linkTag = searchWrapper.querySelector("a");
 let webLink;
 
-
+let flag=0;
+let flag2=0;
+let pointer=0;
 // if user press any key and release
 inputBox.onkeyup = (e)=>{
+    /*
+    if(e.which==40){
+        console.log("40") //40 down arrow
+    }
+    if(e.which==38){
+        console.log("38") //38 up arrow
+    }
+    
+    if(e.which==13){
+        console.log("13") //13 enter 
+    }
+
+     if(flag==1){
+        flag-=1;
+    }
+   
+    */
+    flag=0;
+    flag2=0;
+ 
+
+    
+
     let userData = e.target.value; //user enetered data
     let emptyArray = [];
     if(userData){
-        icon.onclick = ()=>{
-            webLink = `https://www.google.com/search?q=${userData}`;
-            linkTag.setAttribute("href", webLink);
-            linkTag.click();
-        }
+        
+
         emptyArray = suggestions.filter((data)=>{
             //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
             return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
         });
         emptyArray = emptyArray.map((data)=>{
             // passing return data inside li tag
+            
             return data = `<li>${data}</li>`;
         });
         searchWrapper.classList.add("active"); //show autocomplete box
-        showSuggestions(emptyArray);
+
+        //suggBox.classList.add("selected");//???
+
+        //searchWrapper.classList.add("selected");//xxx
+
+        //showSuggestions(emptyArray);
         let allList = suggBox.querySelectorAll("li");
+        
+     
+        
+        let upperbound=allList.length-1;
+        
+        
+      
         for (let i = 0; i < allList.length; i++) {
             //adding onclick attribute in all li tag
             allList[i].setAttribute("onclick", "select(this)");
+        
+     
+          
+
+            
+            //up arrow down arrow hit enter to select
+            if((e.which==40) & (flag==0)){
+                console.log("40") //40 down arrow
+                if(pointer<upperbound){
+                    pointer+=1;
+                    flag=1;
+                  
+                }
+           
+            
+
+                console.log(pointer);
+                //allList[pointer]                           //
+            }
+            if((e.which==38) & (flag==0)){//
+                console.log("38") //38 up arrow
+                if(pointer>0){
+                    pointer-=1;
+                    flag=1;
+                   
+                }
+
+                
+                console.log(pointer);
+                                                   //
+            }
+
+            if((e.which==13) & (flag2==0)) {//和上面一样的如果不加flag只按一次enter就会不断的点enter的效果。。
+                console.log("13") ;//13 enter
+                console.log(pointer) ;
+
+                console.log(allList[pointer]);
+                select(allList[pointer]);
+                pointer=0;
+                flag2=1;
+               
+
+               
+                console.log("selct via key enter");
+            }
+
+            if((flag==0)&(pointer!=upperbound)){
+                
+                pointer=0;//如果直接在这写pointer=0就不行，就会把pointe卡死在0
+            }
+
+
         }
+        
     }else{
         searchWrapper.classList.remove("active"); //hide autocomplete box
     }
+
+    showSuggestions(emptyArray);//
 }
 
 
@@ -3530,11 +3620,7 @@ dict.Wyoming=[
 function select(element){
     let selectData = element.textContent;
     inputBox.value = selectData;
-    icon.onclick = ()=>{
-        webLink = `https://www.google.com/search?q=${selectData}`;
-        linkTag.setAttribute("href", webLink);
-        linkTag.click();
-    }
+
     searchWrapper.classList.remove("active");
 
     var mapProp= {
@@ -3567,9 +3653,14 @@ function showSuggestions(list){
         userValue = inputBox.value;
         listData = `<li>${userValue}</li>`;
     }else{
+      console.log("这里的pointer");
+      console.log(pointer);
+
+      list[pointer]=`<a>${list[pointer]}</a>`; //successful!2021-09-01 13:12:00 (EDT)
       listData = list.join('');
     }
     suggBox.innerHTML = listData;
+   
 }
 
 
