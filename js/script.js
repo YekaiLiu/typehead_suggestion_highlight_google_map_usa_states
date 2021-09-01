@@ -45,7 +45,7 @@ inputBox.onkeyup = (e)=>{
             return data = `<li>${data}</li>`;
         });
         searchWrapper.classList.add("active"); //show autocomplete box
-        showSuggestions(emptyArray);
+        
         let allList = suggBox.querySelectorAll("li");
         
         let upperbound=allList.length-1
@@ -53,6 +53,9 @@ inputBox.onkeyup = (e)=>{
         
       
         for (let i = 0; i < allList.length; i++) {
+
+            
+
             //adding onclick attribute in all li tag
             allList[i].setAttribute("onclick", "select(this)");
             if((e.which==40) & (flag==0)){
@@ -106,6 +109,24 @@ inputBox.onkeyup = (e)=>{
     }else{
         searchWrapper.classList.remove("active"); //hide autocomplete box
     }
+
+    showSuggestions(emptyArray);
+
+    let allList = suggBox.querySelectorAll("li");
+
+    for (let i = 0; i < allList.length; i++) {
+
+            
+
+        //adding onclick attribute in all li tag
+        allList[i].setAttribute("onclick", "select(this)");}
+
+
+
+
+
+
+
 
     
 }
